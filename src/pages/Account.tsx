@@ -1,4 +1,4 @@
-import { Avatar, Box, CardHeader } from "@mui/material";
+import { Avatar, Box, CardHeader, styled } from "@mui/material";
 import AccountBalance from "../components/AccountBalance";
 import TransactionHistory from "../components/TransactionHistory";
 
@@ -25,33 +25,29 @@ function Account() {
 
 	const data = formatData(state.transactions).reverse();
 
+	const StyledHistoryBox = styled(Box)(() => ({
+		overflowY: 'scroll',
+		height: "fit-content",
+		maxHeight: '375px'
+	}))
 	return (
 		<Box >
 			<CardHeader
 				avatar={
 					<Avatar
-						sx={{
-							bgcolor: "black",
-						}}
-					>
-						A
-					</Avatar>
+						sx={{							bgcolor: "black"						}}					>						A					</Avatar>
 				}
 				title="Account 1"
 				subheader="0xb93c...68aa"
 			/>
 			<AccountBalance />
 
-			<Box
-			sx={{
-			overflowY: 'scroll',
-			height: "fit-content",
-			maxHeight: '375px'
-		}}>
-			 {data.map((element, index)=>(
-            <TransactionHistory data={element} key={index}/>
-			 ))}
-				</Box>
+			<StyledHistoryBox>
+				{data.map((element, index)=>(
+					<TransactionHistory data={element} key={index}/>
+				))}
+				
+				</StyledHistoryBox>
 		</Box>
 	);
 }
